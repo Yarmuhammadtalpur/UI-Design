@@ -13,13 +13,47 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-
+import Avatar from "@mui/material/Avatar";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import Divider from "@mui/material/Divider";
+import PersonAdd from "@mui/icons-material/PersonAdd";
+import Settings from "@mui/icons-material/Settings";
+import Logout from "@mui/icons-material/Logout";
 const pages = [
-  "Technologies",
-  "Engineering",
-  "Services",
-  "Resources",
-  "IP Protection",
+  {
+    page: "Technologies",
+    menuLeft: [
+      "Blockchain",
+      "Virtual Reality",
+      "Cloud Transformation",
+      "Machine Learning and AI",
+    ],
+    menuRight: [
+      "Qunatum Computing",
+      "Internet of Things",
+      "Penetration Testing",
+    ],
+  },
+  {
+    page: "Engineering",
+    menuLeft: [
+      "Full Stack Web Development",
+      "Mobile Development",
+      "UI/UX Design",
+    ],
+    menuRight: ["System Engineering", "DevOps Engineering"],
+  },
+  {
+    page: "Services",
+    menuLeft: ["Product Design", "Consulting"],
+    menuRight: ["Full-Cycle Development", "Maintenance and Support"],
+  },
+  {
+    page: "Resources",
+    menuLeft: ["Articles", "Contact Support "],
+    menuRight: ["FAQ"],
+  },
+  { page: "IP Protection", menuLeft: [], menuRight: [] },
 ];
 
 function Navbar() {
@@ -32,6 +66,14 @@ function Navbar() {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <AppBar
@@ -43,6 +85,9 @@ function Navbar() {
         paddingBlockEnd: "50px",
       }}
     >
+      {/*  */}
+
+      {/* /// */}
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
@@ -99,7 +144,7 @@ function Navbar() {
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center" sx={{ color: "gray" }}>
-                    {page}
+                    {page.page}
                   </Typography>
                 </MenuItem>
               ))}
@@ -132,9 +177,9 @@ function Navbar() {
             justifyContent="space-evenly"
             sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
           >
-            {pages.map((page) => (
+            {pages.map((item) => (
               <Button
-                key={page}
+                key={item}
                 onClick={handleCloseNavMenu}
                 sx={{
                   my: 2,
@@ -144,8 +189,123 @@ function Navbar() {
                 }}
               >
                 <div className={classes.menuText}>
-                  {page}
-                  {page !== "IP Protection" && <KeyboardArrowDownIcon />}
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      textAlign: "center",
+                    }}
+                  >
+                    <Tooltip title="Account settings">
+                      <IconButton
+                        onClick={handleClick}
+                        size="small"
+                        sx={{ ml: 2 }}
+                        aria-controls={open ? "account-menu" : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? "true" : undefined}
+                      >
+                        {item.page}
+                        {item.page !== "IP Protection" && (
+                          <KeyboardArrowDownIcon />
+                        )}
+                      </IconButton>
+                    </Tooltip>
+                  </Box>
+                  <Menu
+                    anchorEl={anchorEl}
+                    id="account-menu"
+                    open={open}
+                    onClose={handleClose}
+                    PaperProps={{
+                      elevation: 0,
+                      sx: {
+                        overflow: "visible",
+                        filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                        mt: 1.5,
+                        "& .MuiAvatar-root": {
+                          width: 32,
+                          height: 32,
+                          ml: -0.5,
+                          mr: 1,
+                        },
+                        "&:before": {
+                          content: '""',
+                          display: "block",
+                          position: "absolute",
+                          top: 0,
+                          right: 14,
+                          width: 10,
+                          height: 10,
+                          bgcolor: "background.paper",
+                          transform: "translateY(-50%) rotate(45deg)",
+                          zIndex: 0,
+                        },
+                      },
+                    }}
+                    transformOrigin={{ horizontal: "right", vertical: "top" }}
+                    anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+                  >
+                    <div className={classes.MenudropItems}>
+                      <div className={classes.MenudropItemLeft}>
+                        {/* {item.menuLeft.map((item) => (
+                          <MenuItem>
+                            <ListItemIcon className={classes.MenudropItemIcon}>
+                              <PersonAdd fontSize="small" />
+                            </ListItemIcon>
+                            {item}
+                          </MenuItem>
+                        ))} */}
+
+                        <MenuItem>
+                          <ListItemIcon className={classes.MenudropItemIcon}>
+                            <PersonAdd fontSize="small" />
+                          </ListItemIcon>
+                          Add another account
+                        </MenuItem>
+                        <MenuItem>
+                          <ListItemIcon className={classes.MenudropItemIcon}>
+                            <Settings fontSize="small" />
+                          </ListItemIcon>
+                          Settings
+                        </MenuItem>
+                        <MenuItem>
+                          <ListItemIcon className={classes.MenudropItemIcon}>
+                            <Logout fontSize="small" />
+                          </ListItemIcon>
+                          Logout
+                        </MenuItem>
+                      </div>
+                      <div className={classes.MenudropItemRight}>
+                        {/* {page.menuRight.map((item) => (
+                          <MenuItem>
+                            <ListItemIcon className={classes.MenudropItemIcon}>
+                              <PersonAdd fontSize="small" />
+                            </ListItemIcon>
+                            {item}
+                          </MenuItem>
+                        ))} */}
+                        <MenuItem>
+                          <ListItemIcon className={classes.MenudropItemIcon}>
+                            <PersonAdd fontSize="small" />
+                          </ListItemIcon>
+                          Add another account
+                        </MenuItem>
+                        <MenuItem>
+                          <ListItemIcon className={classes.MenudropItemIcon}>
+                            <Settings fontSize="small" />
+                          </ListItemIcon>
+                          Settings
+                        </MenuItem>
+                        <MenuItem>
+                          <ListItemIcon className={classes.MenudropItemIcon}>
+                            <Logout fontSize="small" />
+                          </ListItemIcon>
+                          Logout
+                        </MenuItem>
+                      </div>
+                    </div>
+                  </Menu>
                 </div>
               </Button>
             ))}

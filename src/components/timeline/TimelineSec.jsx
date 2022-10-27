@@ -157,14 +157,14 @@ export default function TimelineSec() {
                         fontFamily: "monospace",
                         fontWeight: 700,
                         color: "Black",
-                        fontSize: { xs: "1rem", md: "1.4rem" },
+                        fontSize: { xs: "1rem", md: "1.2rem" },
                         lineHeight: { xs: ".5px" },
                         textDecoration: "none",
                         width: "max-content",
                       }}
                     >
                       {item.head.split("\n").map((i) => {
-                        return <h3>{i}</h3>;
+                        return <h4>{i}</h4>;
                       })}
                     </Typography>
                     <Box>
