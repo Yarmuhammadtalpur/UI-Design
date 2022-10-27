@@ -1,0 +1,36 @@
+.topBorder {
+  border-top: solid #fdd800 5px;
+  width: 100px;
+  margin-top: 20px;
+  position: absolute;
+  z-index: -1;
+}
+.timelineItems {
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+}
+/* .timelineItem {
+  display: flex;
+  flex-direction: row;
+  text-align: right; */
+/* } */
+.TitleTime {
+  text-align: start;
+}
+
+.details {
+  font-family: monospace;
+  font-weight: 500;
+  color: black;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 850px) {
+  .details {
+    font-size: 0.8rem;
+  }
+  .topBorder {
+    display: none;
+  }
+}
