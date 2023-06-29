@@ -117,7 +117,7 @@ export default function TimelineSec() {
           {timelinetext.map((item) => (
             <TimelineItem
               key={item.No}
-              position={item.position}
+              position="left"
               sx={{ margin: { xs: "50px 0", md: "0" } }}
             >
               <TimelineSeparator>
@@ -161,6 +161,7 @@ export default function TimelineSec() {
                         lineHeight: { xs: ".5px" },
                         textDecoration: "none",
                         width: "max-content",
+                        textAlign: "right",
                       }}
                     >
                       {item.head.split("\n").map((i) => {
